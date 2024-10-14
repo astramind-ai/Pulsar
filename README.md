@@ -17,6 +17,15 @@
 - [Contributing](#contributing)
 - [Support](#support)
 
+<p align="center">
+  <img src="images/homepage.png" alt="Image 1" width="500"/>
+  <img src="images/homepage_2.png" alt="Image 2" width="500"/>
+</p>
+<p align="center">
+  <img src="images/selectpersonality.png" alt="Image 1" width="500"/>
+  <img src="images/chat.png" alt="Image 2" width="500"/>
+</p>
+
 ## Introduction
 
 Welcome to Pulsar AI 🚀 
