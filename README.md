@@ -97,7 +97,7 @@ Created by two passionate programmers, this project aims to push the boundaries 
 ### Quick installation (Linux)
 If you have a Linux OS, you can use our installation script in installer/installer.sh. 
 
-Copy both of the file in a new directory and then run `sudo chmod +x installer.sh` and then `bash installer.sh`
+Download the file in a and then run `sudo chmod +x installer.sh` and then `bash installer.sh`
 
 ### Detailed instructions
 Pulsar AI offers flexible installation options to suit different user needs and environments. For detailed, step-by-step installation instructions, please refer to our comprehensive [Linux Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-LINUX.md) | [Windows Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-LINUX.md).
