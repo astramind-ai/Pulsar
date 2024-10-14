@@ -184,6 +184,8 @@ else
     exit 0
 fi
 
+PULSAR_DB_PASSWORD=$(openssl rand -base64 32)
+
 
 # Create Pulsar directory structure
 ORIGINAL_HOME="/home/${ORIGINAL_USER}"
@@ -250,7 +252,7 @@ DO
 \$\$
 BEGIN
   IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'astramind') THEN
-    CREATE USER astramind WITH PASSWORD '\${PULSAR_DB_PASSWORD}';
+    CREATE USER astramind WITH PASSWORD '${PULSAR_DB_PASSWORD}';
   END IF;
 END
 \$\$;
@@ -269,12 +271,14 @@ END
 GRANT ALL PRIVILEGES ON DATABASE pulsar TO astramind;
 EOF
 
+
+
 # Create .env file
 ENV_FILE="${PULSAR_DIR}/.env"
 
 if [ ! -f "$ENV_FILE" ]; then
     cat << EOF > "$ENV_FILE"
-PULSAR_DB_PASSWORD=$(openssl rand -base64 32)
+PULSAR_DB_PASSWORD=$PULSAR_DB_PASSWORD
 PULSAR_DB_USER=astramind
 PULSAR_DB_NAME=localhost:5432/pulsar
 PULSAR_HF_TOKEN=
