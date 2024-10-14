@@ -41,7 +41,7 @@ This method is the easiest and most consistent way to install Pulsar AI.
 
 3. Download the Pulsar AI installer script:
    ```bash
-   wget https://raw.githubusercontent.com/astramind-ai/Pulsar/main/installer.sh
+   wget https://raw.githubusercontent.com/astramind-ai/Pulsar/refs/heads/main/installer/installer.sh
    ```
 
 4. Make the script executable:
