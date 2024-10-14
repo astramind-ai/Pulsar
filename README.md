@@ -67,8 +67,8 @@ Created by two passionate programmers, this project aims to push the boundaries 
    - Separate user environments with message versioning
    - Facilitates collaboration and tracking of interactions
 
-6. **Multimodal Model Support** 🖼️🎵
-   - Compatibility with a wide range of AI models, including text, image, and audio
+6. **Multimodal Model Support** 🖼️
+   - Compatibility with a wide range of AI models, including text and image
 
 7. **OpenAI-Compatible API** 🔗
    - Maintains API compatibility with OpenAI standards
