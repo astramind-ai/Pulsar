@@ -1,0 +1,26 @@
+name: AMD Docker Build and Push on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+    build-and-push-amd:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repo
+            uses: actions/checkout@v3
+
+          - name: Log in to Docker Hub
+            uses: docker/login-action@v2
+            with:
+              username: ${{ secrets.DOCKER_USERNAME }}
+              password: ${{ secrets.DOCKER_PASSWORD }}
+
+          - name: Build and push AMD image
+            uses: docker/build-push-action@v4
+            with:
+              context: .
+              file: ./Dockerfile.amd
+              push: true
+              tags: marcoastramind/pulsar-amd:${{ github.ref_name }},marcoastramind/pulsar-amd:latest

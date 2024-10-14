@@ -1,0 +1,36 @@
+# Use the specified base image
+ARG BASE_IMAGE=pytorch/pytorch:2.4.0-cuda12.1-cudnn9-devel
+FROM ${BASE_IMAGE}
+
+# Set up environment variables
+ENV HOME=/home/user
+ENV APP_HOME=$HOME/Pulsar
+
+# Install git and other necessary packages
+RUN apt-get update && \
+    apt-get install -y git curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create user and set up directories
+RUN useradd -m -d $HOME user && \
+    mkdir -p $APP_HOME/configs && \
+    mkdir -p $HOME/.cache/huggingface && \
+    chown -R user:user $HOME
+
+# Set the working directory
+WORKDIR $APP_HOME
+
+# Copy the repository contents into the container
+COPY --chown=user:user . $APP_HOME
+
+# Switch to the non-root user
+USER user
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements-torch-nvidia.txt
+RUN pip install --no-cache-dir flash_attn
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set the entrypoint
+ENTRYPOINT ["python", "server.py"]

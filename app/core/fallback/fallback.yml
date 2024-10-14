@@ -1,0 +1,71 @@
+models:
+
+  # Mistral Models
+  Nous-Hermes-2-Mixtral-8x7B-SFT:
+    GPTQ: TheBloke/Nous-Hermes-2-Mixtral-8x7B-SFT-GPTQ
+    AWQ: TheBloke/Nous-Hermes-2-Mixtral-8x7B-SFT-AWQ
+  Nous-Hermes-2-Mixtral-8x7B-DPO:
+    GPTQ: TheBloke/Nous-Hermes-2-Mixtral-8x7B-DPO-GPTQ
+    AWQ: TheBloke/Nous-Hermes-2-Mixtral-8x7B-DPO-AWQ
+  CapybaraHermes-2.5-Mistral-7B:
+    GPTQ: TheBloke/CapybaraHermes-2.5-Mistral-7B-GPTQ
+    AWQ: TheBloke/CapybaraHermes-2.5-Mistral-7B-AWQ
+  laser-dolphin-mixtral-2x7b-dpo:
+    GPTQ: TheBloke/laser-dolphin-mixtral-2x7b-dpo-GPTQ
+    AWQ: TheBloke/laser-dolphin-mixtral-2x7b-dpo-AWQ
+  # LLama Models
+
+  #   LLama 1
+  TinyLlama-1.1B-Chat-v1.0:
+    GPTQ: TheBloke/TinyLlama-1.1B-Chat-v1.0-GPTQ
+  CodeLlama-70B-Python:
+    GPTQ: TheBloke/CodeLlama-70B-Python-GPTQ
+    AWQ: TheBloke/CodeLlama-70B-Python-AWQ
+  CodeLlama-70B-Instruct:
+    GPTQ: TheBloke/CodeLlama-70B-Instruct-GPTQ
+    AWQ: TheBloke/CodeLlama-70B-Instruct-AWQ
+
+  #   LLama 2
+  Llama-2-7b-chat-hf:
+    GPTQ: TheBloke/Llama-2-7b-chat-hf-GPTQ
+    AWQ: TheBloke/Llama-2-7b-chat-hf-AWQ
+  Llama-2-7B-ft-instruct-es:
+    GPTQ: TheBloke/Llama-2-7B-ft-instruct-es-GPTQ
+  CodeLlama-70B-hf:
+    GPTQ: TheBloke/CodeLlama-70B-hf-GPTQ
+    AWQ: TheBloke/CodeLlama-70B-hf-AWQ
+  CodeLlama-7B-Instruct:
+    GPTQ: TheBloke/CodeLlama-7B-Instruct-GPTQ
+    AWQ: TheBloke/CodeLlama-7B-Instruct-AWQ
+
+  #   LLama 3
+  Meta-Llama-3-8B-Instruct:
+    GPTQ: TechxGenus/Meta-Llama-3-8B-Instruct-GPTQ
+    AWQ: TechxGenus/Meta-Llama-3-8B-Instruct-AWQ
+  Meta-Llama-3-8B:
+    GPTQ: TechxGenus/Meta-Llama-3-8B-GPTQ
+    AWQ: TechxGenus/Meta-Llama-3-8B-AWQ
+  Meta-Llama-3-70B-Instruct:
+    GPTQ: TechxGenus/Meta-Llama-3-70B-Instruct-GPTQ
+    AWQ: TechxGenus/Meta-Llama-3-70B-Instruct-AWQ
+  Meta-Llama-3-70B:
+    GPTQ: TechxGenus/Meta-Llama-3-70B-GPTQ
+    AWQ: TechxGenus/Meta-Llama-3-70B-AWQ
+  LLaMA-Pro-8B-Instruct:
+    GPTQ: TheBloke/LLaMA-Pro-8B-Instruct-GPTQ
+
+  #phi models
+  phi-2:
+    GPTQ: TheBloke/phi-2-GPTQ
+
+  # Qwen Models
+  Qwen1.5-4B-Chat:
+    GPTQ: TheBloke/Qwen1.5-4B-Chat-GPTQ-Int8
+  Qwen1.5-7B-Chat-GPTQ-Int4:
+    GPTQ: TheBloke/Qwen1.5-7B-Chat-GPTQ-Int8
+  Qwen1.5-14B-Chat:
+    GPTQ: TheBloke/Qwen1.5-14B-Chat-GPTQ-Int8
+  Qwen1.5-72B-Chat-GPTQ-Int4:
+    GPTQ: TheBloke/Qwen1.5-72B-Chat-GPTQ-Int4
+
+
