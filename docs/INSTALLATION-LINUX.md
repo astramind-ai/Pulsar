@@ -27,41 +27,29 @@ Before installing Pulsar AI, ensure your system meets the following requirements
 
 This method is the easiest and most consistent way to install Pulsar AI.
 
-1. Install Docker and Docker Compose:
-   ```bash
-   sudo apt-get update
-   sudo apt-get install docker.io docker-compose
-   ```
-
-2. Add your user to the docker group:
-   ```bash
-   sudo usermod -aG docker $USER
-   ```
-   Log out and log back in for this change to take effect.
-
-3. Download the Pulsar AI installer script:
+1. Download the Pulsar AI installer script:
    ```bash
    wget https://raw.githubusercontent.com/astramind-ai/Pulsar/refs/heads/main/installer/installer.sh
    ```
 
-4. Make the script executable:
+2. Make the script executable:
    ```bash
    chmod +x installer.sh
    ```
 
-5. Run the installer script:
+3. Run the installer script:
    ```bash
    ./installer.sh
    ```
 
-6. Follow the prompts in the installer. It will:
+4. Follow the prompts in the installer. It will:
    - Check for a compatible GPU
    - Install Docker and Docker Compose if needed
    - Set up the necessary Docker Compose configuration
    - Create and configure the .env file
    - Start the Pulsar AI services
 
-7. Once the installation is complete, Pulsar AI should be accessible at `http://localhost:40000`.
+5. Once the installation is complete, Pulsar AI should be accessible at `http://localhost:40000`.
 
 ## 3. Manual Installation
 
