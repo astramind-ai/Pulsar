@@ -1,10 +1,12 @@
 [![](https://dcbadge.limes.pink/api/server/https://discord.gg/BEMVTmcPEs)](https://discord.gg/https://discord.gg/BEMVTmcPEs)
 
-# Pulsar AI 🌟: Your Local, Efficient AI Powerhouse
+<h1>
+  <img src="https://github.com/user-attachments/assets/0ea3636b-53b3-4d8b-9749-8a5c42921cf5" alt="drawing" width="50" style="vertical-align: middle; margin-bottom: -50px;"/>
+  Pulsar AI 🌟: Your Local, Sharable and Efficient AI Powerhouse
+</h1>
 
-<p align="center">
-<img src="https://github.com/user-attachments/assets/0ea3636b-53b3-4d8b-9749-8a5c42921cf5" alt="drawing" width="378"/>
-</p>
+![video demo](https://github.com/user-attachments/assets/14cc9b21-b5ed-433a-8ba5-912bc878fad2)
+
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -17,14 +19,7 @@
 - [Contributing](#contributing)
 - [Support](#support)
 
-<p align="center">
-  <img src="images/homepage.png" alt="Image 1" width="500"/>
-  <img src="images/homepage_2.png" alt="Image 2" width="500"/>
-</p>
-<p align="center">
-  <img src="images/selectpersonality.png" alt="Image 1" width="500"/>
-  <img src="images/chat.png" alt="Image 2" width="500"/>
-</p>
+
 
 ## Introduction
 
