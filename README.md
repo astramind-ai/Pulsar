@@ -10,49 +10,52 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Our Vision](#our-vision)
+- [Our Vision](#Our-vision)
 - [Key Features](#key-features)
-- [Technical Highlights](#technical-highlights)
+- [Technical Highlights](#Registration)
 - [Installation](#installation)
-- [Getting Started](#getting-started)
+- [Getting Started](#Getting-Started)
 - [Current State and Roadmap](#current-state-and-roadmap)
 - [Contributing](#contributing)
 - [Support](#support)
+- [Acknowledgments](Acknowledgments)
 
 
+
+## Welcome to Pulsar AI 🚀 
+
+The Pulsar project originated from our desire to have a system that was easy to use, easy to share, and that worked completely locally with language models (LLMs). Initially, we developed Pulsar solely as a user interface to use the models in streaming mode. However, as the project progressed and new features and trends were identified, we expanded its functionality to include features such as roleplaying, support for multimodal models, and soon RAG.
 
 ## Introduction
 
-Welcome to Pulsar AI 🚀 
+Pulsar is a new system developed by Astramind, primarily designed to perform inference and interact with LLM models in a simple, fast, and local manner. Within Pulsar, users can access all text generation models available on Hugging Face. The model library is updated daily to ensure that everyone can find their preferred models. If a specific model is not available, users can manually upload their own models into Pulsar through the UI. Additionally, each model can be specialized by adding a LoRA (automatic compatibility checking) or by incorporating a personality chosen from the Pulsar library. If a desired personality is not available, users can create their own, allowing their models to communicate in a unique way.
 
-Pulsar is an advanced, open-source AI system designed to bring the power of large language models and AI assistants directly to your local machine. Our goal is to provide an efficient, powerful alternative to cloud-based services like ChatGPT and Claude, offering an incredibly robust backend coupled with an easy-to-use, intuitive UI.
+Pulsar is totally free for private individuals and for companies up to one million in revenue. This is precisely why it is designed with a postgresql-based database management architecture and a backend using vllm as the engine, to make it robust for all uses.
 
-### What sets Pulsar apart? 🌟
-
-1. **Local Processing**: Unlike cloud-based solutions, Pulsar runs entirely on your machine, ensuring data privacy and reducing latency.
-2. **Flexibility**: Compatible with a wide range of AI models, from text to image and audio.
-3. **Efficiency**: Optimized for local hardware, making the most of your computer's resources.
-4. **Open Source**: Transparent, customizable, and community-driven development.
+1. **Local Processing**: Unlike cloud-based solutions, Pulsar runs entirely on your machine, ensuring data privacy.
+2. **Compatibility**: Compatible with all vllm models.
+3. **Efficiency**: Optimized for local hardware, during the installation we set the best model for your computational resource.
+4. **Backend**: All the backend is open and can be customizable.
+5. **Tunneling**: Use of tunneling to connect devices in a secure way.
+6. **vLLM**: Pulsar leverages vLLM as its main engine, enhancing it with automatic model compatibility verification, error interception, and resilient configurations to ensure efficient and reliable inference of LLM models.
+7. **Concurrent Batch Processing**: By processing multiple batch tasks concurrently, the system efficiently handles requests from various users simultaneously.
 
 ## Our Vision
 
 We believe that AI should be a tool that anyone can use, right on their own computer, without relying on external services. Pulsar is our attempt to make this vision a reality.
-
-Created by two passionate programmers, this project aims to push the boundaries of AI usability and bring powerful AI capabilities to your local environment. Whether you're a curious researcher, a developer looking to experiment, or just someone interested in AI, we hope Pulsar can be a useful tool in your journey.
+Created by two passionate programmers, this project aims to push the boundaries of AI usability and bring powerful AI capabilities to your local environment.
 
 ## Key Features
 
 1. **Local AI Processing** 🏠
-   - Secure, local storage and management of AI models and associated data
-   - Eliminates dependency on external cloud services for AI computations
+   - Local storage and management of LLM models and associated data
+   - Eliminates dependency on external cloud services for computations
 
 2. **Asynchronous Batch API** ⚡
    - Efficient handling of large-scale batch processing requests powered by the high-performance vLLM engine
-   - Optimized resource allocation for improved throughput
 
 3. **Character-based Chat System** 💬
-   - Engaging chat interface with customizable AI characters
-   - Enhanced user interaction and experience
+   - Engaging chat interface with customizable AI characters, perfect for Role Play
 
 4. **Pulsar Boost: Advanced Search and Decision Making** 🔍
    - Implementation of R-Star algorithm for efficient spatial indexing
@@ -63,57 +66,56 @@ Created by two passionate programmers, this project aims to push the boundaries 
    - Facilitates collaboration and tracking of interactions
 
 6. **Multimodal Model Support** 🖼️
-   - Compatibility with a wide range of AI models, including text and image
+   - Compatibility with all vLLM models, including text and image
 
 7. **OpenAI-Compatible API** 🔗
    - Maintains API compatibility with OpenAI standards
    - Ensures easy integration with existing systems and workflows that are using the OpenAI protocol
 
 8. **Auto-Update Mechanism** 🔄
-   - Seamless, automated updates of the Pulsar system
-   - Ensures the latest features and security patches are always in place
+   - Automated updates of the Pulsar system
 
 9. **Intelligent Model Selection** 🧠
-   - Automated first model selection based on user resources
+   - Automated first model selection based on user computational resources
    - Continuous evaluation and optimization of model choices for best performance
 
 10. **Automated Tunneling System** 🌐
-    - Secure, automatic establishment of tunnels for remote access and management
-    - Simplifies deployment in various network environments
+    - Automatic establishment of tunnels for remote access and management
+    - Avoids complicated DNS or DMZ configurations, allowing users to simply and freely use tunneling
 
 11. **System Compatibility Checks** ✅
     - Automated verification of LoRA (Low-Rank Adaptation) compatibility with models regardless of quantizations
-    - Ensures smooth integration with various AI models and techniques
 
 12. **Auto-Model Addition** 🔍
     - Automated discovery and integration of new models and LoRA weights from HuggingFace
-    - Keeps the system up-to-date with the latest AI advancements
+    - Daily up-to-date with the latest models
 
-## Technical Highlights
-
-- Built on a robust, scalable architecture
-- Implements best practices in security and data management
-- Designed for efficient resource utilization on local hardware
-- Leverages cutting-edge AI technologies and algorithms
+## Registration
+Necessity of registration. This is because registration associates a pair of public and private keys. The machine designated as the server stores the private key and generates encrypted requests to our server, which, by verifying the signature, attests to the validity of the request and associates the new URL with the account. This process is completely free and avoids complicated DNS or DMZ configurations, allowing users to simply and freely use tunneling. 
+**Everything is done to make it possible for the user to connect in a secure way with the local server. We do not keep any additional information of the user. Data users are not our business!!** 
 
 ## Installation
 
-### Quick installation (Linux)
-If you have a Linux OS, you can use our installation script in installer/installer.sh. 
-
+### Linux
+Easy way: you can use our installation script in installer/installer.sh. 
 Download the file in a and then run `sudo chmod +x installer.sh` and then `bash installer.sh`
 
 ### Detailed instructions
-Pulsar AI offers flexible installation options to suit different user needs and environments. For detailed, step-by-step installation instructions, please refer to our comprehensive [Linux Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-LINUX.md) | [Windows Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-LINUX.md).
+
+Pulsar AI offers flexible installation options to suit different user needs and environments.
+For detailed, step-by-step installation instructions, please refer to our gudes:
+**[Linux Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-LINUX.md)** | **[Windows Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/WINDOWS-LINUX.md)**
 
 ## Getting Started
 
-After installation, you can can launch the [Pulsar UI](https://github.com/astramind-ai/PulsarUIReleases). Here are some quick steps to get you started:
+After installation, you can can launch the **[Pulsar UI](https://github.com/astramind-ai/PulsarUIReleases)**
+Here are some quick steps to get you started:
 
-1. **Choose or Create an AI Character**: Select from our predefined characters or create your own.
-2. **Start a Conversation**: Begin interacting with your chosen AI character.
-3. **Explore Features**: Try out different features like batch processing or multimodal inputs.
-4. **Customize Settings**: Adjust settings to optimize Pulsar for your specific needs and hardware.
+1. **Set your computer as a server**: [Tutorial]()
+2. **Choose or Create a Models**: [Tutorial]()
+3. **Choose or Create a Personality**: [Tutorial]()
+4. **Start chatting**: [Tutorial]()
+5. **Explore Features**: [Tutorial]()
 
 
 ## Current State and Roadmap
@@ -122,11 +124,11 @@ As a v0.1.0 release, Pulsar is still in its early stages. It may have rough edge
 
 ### Future Roadmap
 
-- Enhanced support for distributed computing environments
-- Advanced analytics and reporting features
-- Continuous improvement of local AI processing capabilities
-- Integration with more AI models and technologies
-- Improved user interface and experience
+- [ ] Adding text-to-speech
+- [ ] Adding RAG
+- [ ] Enhanced support for distributed computing environments
+- [ ] Improved user interface and experience
+      
 
 ## Contributing
 
@@ -138,6 +140,15 @@ If you encounter any issues or have questions, please:
 
 1. Search existing [Issues](https://github.com/astramind-ai/Pulsar/issues)
 2. Open a new issue if needed
+
+## Acknowledgments
+
+Special thanks to:
+
+[vLLM](https://github.com/vllm-project/vllm)
+[HuggingFace](https://github.com/huggingface)
+[postgresql](https://www.postgresql.org)
+
 
 
 ---
