@@ -147,7 +147,8 @@ Special thanks to:
 
 - [vLLM](https://github.com/vllm-project/vllm)
 - [HuggingFace](https://github.com/huggingface)
-- [postgresql](https://www.postgresql.org)
+- [PostgreSQL](https://www.postgresql.org)
+- [FastAPI](https://github.com/fastapi/fastapi)
 
 
 
