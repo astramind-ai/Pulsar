@@ -108,7 +108,7 @@ For detailed, step-by-step installation instructions, please refer to our gudes:
 
 ## Getting Started
 
-After installation, you can can launch the **[Pulsar UI](https://github.com/astramind-ai/PulsarUIReleases)**
+After installation, you can launch the **[Pulsar UI](https://github.com/astramind-ai/PulsarUIReleases)**
 Here are some quick steps to get you started:
 
 1. **Set your computer as a server**: [Tutorial]()
