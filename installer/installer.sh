@@ -433,7 +433,7 @@ DESKTOP_ENTRY="/usr/share/applications/pulsar.desktop"
 ICON_PATH="${PULSAR_DIR}/pulsar_icon.png"
 
 # Download Pulsar icon
-wget -O $ICON_PATH "https://raw.githubusercontent.com/astramind-ai/Pulsar/main/assets/pulsar_icon.png" || echo -e "\e[1;33mWarning: Unable to download Pulsar icon.\e[0m"
+wget -O $ICON_PATH "https://raw.githubusercontent.com/astramind-ai/Pulsar/main/assets/pulsar_server_icon.png" || echo -e "\e[1;33mWarning: Unable to download Pulsar icon.\e[0m"
 
 # Create a wrapper script for starting Pulsar
 START_SCRIPT="${PULSAR_DIR}/start_pulsar.sh"

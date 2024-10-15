@@ -1,10 +1,12 @@
 [![](https://dcbadge.limes.pink/api/server/https://discord.gg/BEMVTmcPEs)](https://discord.gg/https://discord.gg/BEMVTmcPEs)
 
-# Pulsar AI 🌟: Your Local, Efficient AI Powerhouse
+<h1>
+  <img src="https://github.com/user-attachments/assets/0ea3636b-53b3-4d8b-9749-8a5c42921cf5" alt="drawing" width="50" style="vertical-align: middle; margin-bottom: -50px;"/>
+  Pulsar AI 🌟: Your Local, Sharable and Efficient AI Powerhouse
+</h1>
 
-<p align="center">
-<img src="https://github.com/user-attachments/assets/0ea3636b-53b3-4d8b-9749-8a5c42921cf5" alt="drawing" width="378"/>
-</p>
+![video demo](https://github.com/user-attachments/assets/14cc9b21-b5ed-433a-8ba5-912bc878fad2)
+
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -16,6 +18,8 @@
 - [Current State and Roadmap](#current-state-and-roadmap)
 - [Contributing](#contributing)
 - [Support](#support)
+
+
 
 ## Introduction
 
@@ -58,8 +62,8 @@ Created by two passionate programmers, this project aims to push the boundaries 
    - Separate user environments with message versioning
    - Facilitates collaboration and tracking of interactions
 
-6. **Multimodal Model Support** 🖼️🎵
-   - Compatibility with a wide range of AI models, including text, image, and audio
+6. **Multimodal Model Support** 🖼️
+   - Compatibility with a wide range of AI models, including text and image
 
 7. **OpenAI-Compatible API** 🔗
    - Maintains API compatibility with OpenAI standards
@@ -97,14 +101,14 @@ Created by two passionate programmers, this project aims to push the boundaries 
 ### Quick installation (Linux)
 If you have a Linux OS, you can use our installation script in installer/installer.sh. 
 
-Copy both of the file in a new directory and then run `sudo chmod +x installer.sh` and then `bash installer.sh`
+Download the file in a and then run `sudo chmod +x installer.sh` and then `bash installer.sh`
 
 ### Detailed instructions
 Pulsar AI offers flexible installation options to suit different user needs and environments. For detailed, step-by-step installation instructions, please refer to our comprehensive [Linux Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-LINUX.md) | [Windows Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-LINUX.md).
 
 ## Getting Started
 
-After installation, you can access Pulsar at `http://localhost:40000`. Here are some quick steps to get you started:
+After installation, you can can launch the [Pulsar UI](https://github.com/astramind-ai/PulsarUIReleases). Here are some quick steps to get you started:
 
 1. **Choose or Create an AI Character**: Select from our predefined characters or create your own.
 2. **Start a Conversation**: Begin interacting with your chosen AI character.
