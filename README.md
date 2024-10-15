@@ -2,7 +2,7 @@
 
 <h1>
   <img src="https://github.com/user-attachments/assets/0ea3636b-53b3-4d8b-9749-8a5c42921cf5" alt="drawing" width="50" style="vertical-align: middle; margin-bottom: -50px;"/>
-  Pulsar AI 🌟: Your Local, Sharable and Efficient AI Powerhouse
+  Pulsar AI 🌟: Your Local, Sharable AI Powerhouse
 </h1>
 
 ![video demo](https://github.com/user-attachments/assets/14cc9b21-b5ed-433a-8ba5-912bc878fad2)
@@ -10,11 +10,11 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Our Vision](#Our-vision)
+- [Our Vision](#our-vision)
 - [Key Features](#key-features)
-- [Technical Highlights](#Registration)
+- [Registration](#registration)
 - [Installation](#installation)
-- [Getting Started](#Getting-Started)
+- [Getting Started](#getting-started)
 - [Current State and Roadmap](#current-state-and-roadmap)
 - [Contributing](#contributing)
 - [Support](#support)
@@ -145,9 +145,9 @@ If you encounter any issues or have questions, please:
 
 Special thanks to:
 
-[vLLM](https://github.com/vllm-project/vllm)
-[HuggingFace](https://github.com/huggingface)
-[postgresql](https://www.postgresql.org)
+- [vLLM](https://github.com/vllm-project/vllm)
+- [HuggingFace](https://github.com/huggingface)
+- [postgresql](https://www.postgresql.org)
 
 
 
