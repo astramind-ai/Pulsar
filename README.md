@@ -20,7 +20,7 @@
 - [Support](#support)
 - [Acknowledgments](Acknowledgments)
 
-
+![Pulsar Flow](images/pulsarflow.png)
 
 ## Welcome to Pulsar AI 🚀 
 
