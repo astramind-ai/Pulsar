@@ -35,7 +35,7 @@ This guide will help you set up Pulsar AI on Windows with either NVIDIA or AMD G
 4. After installation, restart your computer.
 5. Start Docker Desktop and wait for it to finish starting up.
 
-## 3. Setting Up Pulsar AI
+## 3. Setting Up Pulsar Server
 
 We'll use a PowerShell script to automate most of the setup process. 
 
@@ -214,6 +214,10 @@ Write-Host "Setup complete. To start Pulsar AI, run 'docker-compose up -d' in th
 
 4. After the script completes, it will have created all necessary files and directories.
 
+## 5. Installing Pulsar UI 
+
+Install [this](https://github.com/astramind-ai/PulsarUIReleases/releases/download/v0.1.0/Pulsar.Setup.0.1.0.exe) and folow the instruction to complete the installation
+
 ## 4. Running Pulsar AI
 
 1. Ensure Docker Desktop is running and GPU support is enabled:
@@ -221,26 +225,23 @@ Write-Host "Setup complete. To start Pulsar AI, run 'docker-compose up -d' in th
    - Go to Settings > General
    - Make sure "Use GPU for compute" is checked (for NVIDIA GPUs)
 
-2. For AMD GPUs, you may need to install additional software:
-   - Install the [ROCm for Windows](https://rocm.docs.amd.com/en/latest/deploy/windows/quick_start.html) package
-   - Follow the instructions to set up the necessary environment variables
-
-3. In PowerShell, navigate to the Pulsar directory:
+2. In PowerShell, navigate to the Pulsar directory:
    ```powershell
    cd $env:USERPROFILE\pulsar
    ```
 
-4. Start Pulsar AI:
+3. Start Pulsar AI:
    ```powershell
    docker-compose up -d
    ```
 
-5. Check the logs to ensure everything is running correctly:
+4. Check the logs to ensure everything is running correctly:
    ```powershell
    docker-compose logs -f
    ```
+   
+5. Start the Pulsar UI ans finish the setup to bind your account to your server, or just use it locally.
 
-Pulsar AI should now be accessible at `http://localhost:40000`.
 
 ## Troubleshooting
 
