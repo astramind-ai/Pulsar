@@ -429,7 +429,7 @@ else
 fi
 
 # Create desktop entry
-DESKTOP_ENTRY="/usr/share/applications/pulsar.desktop"
+DESKTOP_ENTRY="/usr/share/applications/pulsar_server.desktop"
 ICON_PATH="${PULSAR_DIR}/pulsar_icon.png"
 
 # Download Pulsar icon
@@ -450,7 +450,7 @@ chown $ORIGINAL_USER:$ORIGINAL_USER "$START_SCRIPT"
 # Modify the desktop entry to use the wrapper script and Terminal=true
 cat << EOF > $DESKTOP_ENTRY
 [Desktop Entry]
-Name=Pulsar-Server
+Name=Pulsar Server
 Exec=${START_SCRIPT}
 Icon=$ICON_PATH
 Type=Application
@@ -459,6 +459,40 @@ Terminal=true
 EOF
 
 chmod +x $DESKTOP_ENTRY
+
+# Download the latest Pulsar UI AppImage
+echo -e "\e[1;34mDownloading the latest Pulsar UI AppImage...\e[0m"
+LATEST_RELEASE_URL="https://api.github.com/repos/astramind-ai/PulsarUIReleases/releases/latest"
+LATEST_APPIMAGE_URL=$(curl -s $LATEST_RELEASE_URL | grep "browser_download_url.*AppImage" | cut -d '"' -f 4)
+
+if [ -z "$LATEST_APPIMAGE_URL" ]; then
+    echo -e "\e[1;31mError: Unable to find the latest Pulsar UI AppImage.\e[0m"
+else
+    UI_APPIMAGE_PATH="${PULSAR_DIR}/PulsarUI.AppImage"
+    wget -O "$UI_APPIMAGE_PATH" "$LATEST_APPIMAGE_URL" || echo -e "\e[1;33mWarning: Unable to download Pulsar UI AppImage.\e[0m"
+    chmod +x "$UI_APPIMAGE_PATH"
+    chown $ORIGINAL_USER:$ORIGINAL_USER "$UI_APPIMAGE_PATH"
+
+    # Download Pulsar UI icon
+    UI_ICON_PATH="${PULSAR_DIR}/pulsar_ui_icon.png"
+    wget -O "$UI_ICON_PATH" "https://raw.githubusercontent.com/astramind-ai/Pulsar/main/assets/pulsar_UI_icon.png" || echo -e "\e[1;33mWarning: Unable to download Pulsar UI icon.\e[0m"
+    chown $ORIGINAL_USER:$ORIGINAL_USER "$UI_ICON_PATH"
+
+    # Create desktop entry for Pulsar UI
+    UI_DESKTOP_ENTRY="/usr/share/applications/pulsar_ui.desktop"
+    cat << EOF > $UI_DESKTOP_ENTRY
+[Desktop Entry]
+Name=Pulsar UI
+Exec=${UI_APPIMAGE_PATH}
+Icon=$UI_ICON_PATH
+Type=Application
+Categories=Utility;
+Terminal=false
+EOF
+
+    chmod +x $UI_DESKTOP_ENTRY
+    echo -e "\e[1;32mPulsar UI installed and desktop entry created.\e[0m"
+fi
 
 # Set up auto-update for Docker images
 UPDATE_SCRIPT="${PULSAR_DIR}/update_pulsar.sh"
@@ -477,12 +511,7 @@ chown $ORIGINAL_USER:$ORIGINAL_USER "$UPDATE_SCRIPT"
 (crontab -l -u $ORIGINAL_USER 2>/dev/null; echo "0 0 * * 0 $UPDATE_SCRIPT") | crontab -u $ORIGINAL_USER -
 
 echo -e "\e[1;32m\nPulsar installation and setup complete!\e[0m"
-echo -e "\e[1;32mYou can now launch Pulsar from your application menu or run the following commands:\e[0m"
-echo -e "\e[1;37mbash ${START_SCRIPT}\e[0m"
+echo -e "\e[1;32mYou can now launch Pulsar Server and Pulsar UI from your application menu\e[0m"
 echo -e "\e[1;32mPulsar will auto-update weekly.\e[0m"
 
-# Start Pulsar
-echo -e "\e[1;34m\nStarting Pulsar...\e[0m"
-sudo -u $ORIGINAL_USER bash -c "cd ${PULSAR_DIR}; docker-compose pull; docker-compose up"
 
-echo -e "\e[1;32m\nPulsar is now running!\e[0m"
