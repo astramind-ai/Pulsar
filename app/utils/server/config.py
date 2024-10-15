@@ -25,7 +25,7 @@ models = {
     "roleplay": {
         "18+": {
             "ArliAI/Llama-3.1-70B-ArliAI-RPMax-v1.1-GPTQ_Q4": 40,
-            "ArliAI/Mistral-Small-22B-ArliAI-RPMax-v1.1-GPTQ_Q8": 23,
+            "ArliAI/Mistral-Small-22B-ArliAI-RPMax-v1.1-GPTQ_Q8": 24,
             "ArliAI/Mistral-Small-22B-ArliAI-RPMax-v1.1-GPTQ_Q4":12.2,
             "AmmarByFar/MN-12B-Celeste-V1.9-AWQ-4bit": 8.3,
             "TheBloke/LLaMA2-13B-Estopia-GPTQ": 7.3,
@@ -37,7 +37,7 @@ models = {
         },
         "all-ages": {
             "ArliAI/Llama-3.1-70B-ArliAI-RPMax-v1.1-GPTQ_Q4": 40,
-            "ArliAI/Mistral-Small-22B-ArliAI-RPMax-v1.1-GPTQ_Q8": 23,
+            "ArliAI/Mistral-Small-22B-ArliAI-RPMax-v1.1-GPTQ_Q8": 24,
             "ArliAI/Mistral-Small-22B-ArliAI-RPMax-v1.1-GPTQ_Q4": 12.2,
             "casperhansen/mistral-nemo-instruct-2407-awq": 8,
             "solidrust/Mistral-NeMo-Minitron-8B-Base-AWQ": 6,
