@@ -108,7 +108,7 @@ Pulsar AI offers flexible installation options to suit different user needs and 
 
 ## Getting Started
 
-After installation, you can can launch the [Pulsar UI](https://github.com/astramind-ai/PulsarUIReleases). Here are some quick steps to get you started:
+After installation, you can launch the [Pulsar UI](https://github.com/astramind-ai/PulsarUIReleases). Here are some quick steps to get you started:
 
 1. **Choose or Create an AI Character**: Select from our predefined characters or create your own.
 2. **Start a Conversation**: Begin interacting with your chosen AI character.
