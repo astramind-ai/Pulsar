@@ -113,9 +113,8 @@ Here are some quick steps to get you started:
 
 1. **Set your computer as a server**: [Tutorial]()
 2. **Choose or Create a Models**: [Tutorial]()
-3. **Choose or Create a Personality**: [Tutorial]()
-4. **Start chatting**: [Tutorial]()
-5. **Explore Features**: [Tutorial]()
+3. **Choose or Create a Personality**: [Tutorial](tutorial/Choose_or_Create_a_Personality.md)
+4. **Start chatting and explore advance settings**: [Tutorial](tutorial/Chatting_and_advance_setting.md)
 
 
 ## Current State and Roadmap
