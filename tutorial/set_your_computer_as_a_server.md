@@ -17,7 +17,7 @@ Registration is necessary because it associates a pair of public and private key
 
 ## Step 1: Download and Start the Pulsar Server
 
-The first step is to download and install the Pulsar Server, then activate it. Refer to the installation guide for Linux or Windows at:
+The first step is to download and install the Pulsar Server, then activate it. Refer to the installation guide for [Linux](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-LINUX.md) or [Windows](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-WINDOWS.md).
 
 Once the server is running, download it and double-click on Pulsar UI.
 
