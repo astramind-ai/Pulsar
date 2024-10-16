@@ -1,4 +1,4 @@
-# Choose or Create a Model
+# Choose or Create a Personality
 
 *This guide provides a step-by-step process to help you create or select a model personality. By following these steps, you'll be able to customize a personality that fits your needs.*
 
