@@ -7,7 +7,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.responses import JSONResponse
 
 # Database and utility imports for user authentication and file handling.
-from app.db.auth.auth_db import authenticate_user, create_access_token, get_current_user, get_user, create_user
+from app.db.auth.auth_db import authenticate_user, create_access_token, get_current_user, get_user, create_user, \
+    get_current_user_for_login
 from app.db.model.auth import User
 from app.utils.database.get import get_db
 from app.utils.definitions import UPLOAD_DIRECTORY
@@ -25,14 +26,10 @@ async def get_router_image(image_name: str):
 
 # Endpoint for login and token generation.
 @router.post("/token", response_model=AuthToken)
-async def login_for_access_token(username: str = Form(...), db: AsyncSession = Depends(get_db)):
+async def login_for_access_token(username: str = Form(...), validate_token=Depends(get_current_user_for_login), db: AsyncSession = Depends(get_db)):
     user = await authenticate_user(db, username)
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     access_token = create_access_token(data={"sub": user.name})
     return JSONResponse({"access_token": access_token, "token_type": "bearer"})
 

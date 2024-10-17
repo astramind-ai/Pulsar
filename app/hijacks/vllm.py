@@ -42,6 +42,8 @@ class ExtendedAsyncEngineArgs(AsyncEngineArgs):
     enable_txt2img: bool = False
     use_config_file: bool = True
     server_config_file: str = "last.yml"
+    allow_unsafe_local_requests: bool = False
+    will_local_auth_token_rotate: bool = False
 
     @classmethod
     def from_model_conf(cls, config: dict):

@@ -222,6 +222,12 @@ async def main():
 
     server_args = ExtendedAsyncCompleteServerArgs.from_yaml(CONF_FILE)
 
+    if server_args.will_local_auth_token_rotate:
+        # if the token is set to rotate, generate a new token
+        LOCAL_TOKEN = ''.join([str(uuid.uuid4()) for _ in range(3)])
+        os.environ['LOCAL_TOKEN'] = LOCAL_TOKEN
+        set_key('.env', 'LOCAL_TOKEN', LOCAL_TOKEN)
+
     eng_args = server_args.get_async_eng_args()
     app.add_middleware(
         CORSMiddleware,

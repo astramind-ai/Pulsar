@@ -42,11 +42,24 @@ async def validate_token(token: str = Depends(oauth2_scheme), ip: str = None):
     Raises:
         HTTPException: If the token is invalid or does not match expected values.
     """
-    if is_same_machine_request(ip):
-        if token != LOCAL_TOKEN:
-            raise credential_exception
-        return {"username": "local_user", "is_local": True}
+    from app.core.engine import async_engine_args
     try:
+        # We check if the request is form a local ip address
+        if is_same_machine_request(ip) or is_from_same_network(ip):
+            # we check if the token is the local token
+            if token == LOCAL_TOKEN:
+                return {"username": "local_user", "is_local": True}
+            # we check if the user have chosen to allow local unauth request
+            elif async_engine_args.allow_unsafe_local_requests:
+                return {"username": "local_user", "is_local": True}
+            else:
+                # we try to decode the token
+                payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+                username: str = payload.get("sub")
+                if username is None:
+                    raise credential_exception
+                return username
+
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
         if username is None:
@@ -190,6 +203,43 @@ def is_same_machine_request(client_ip: str) -> bool:
     return client_ip in get_localhost_addresses()
 
 
+import ipaddress
+
+
+def is_from_same_network(client_ip: str) -> bool:
+    """
+    Check if a request originates from a private network IP address.
+
+    This function checks against common private IP ranges:
+    - IPv4: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
+    - IPv6: fd00::/8 (Unique Local Addresses)
+
+    Args:
+        client_ip (str): The IP address of the incoming request.
+
+    Returns:
+        bool: True if the request originates from a private network, False otherwise.
+    """
+    try:
+        ip = ipaddress.ip_address(client_ip)
+
+        if ip.version == 4:
+            private_networks = [
+                ipaddress.ip_network("10.0.0.0/8"),
+                ipaddress.ip_network("172.16.0.0/12"),
+                ipaddress.ip_network("192.168.0.0/16")
+            ]
+            return any(ip in network for network in private_networks)
+
+        elif ip.version == 6:
+            ula_network = ipaddress.ip_network("fd00::/8")
+            return ip in ula_network
+
+        return False
+
+    except ValueError:
+        # If the IP address is invalid, return False
+        return False
 
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     """
@@ -211,6 +261,21 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
             raise credential_exception
         return user
 
+async def get_current_user_for_login(token: str = Depends(oauth2_scheme)):
+    """
+    Retrieve the current authenticated user based on the provided token.
+
+    Args:
+        token (str): The access token.
+
+    Returns:
+        User: The authenticated user object.
+
+    Raises:
+        HTTPException: If the user cannot be authenticated.
+    """
+    if not token == os.environ.get("LOCAL_TOKEN"):
+        raise credential_exception
 
 
 async def auth_user_with_local_exception(request: Request, token: str = Depends(oauth2_scheme)):

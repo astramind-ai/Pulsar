@@ -150,7 +150,7 @@ async def online_login(username: str = Form(...), password: str = Form(...), db:
             await set_local_url_online(localtunnel_url)  # Set the local URL online
         except Exception as e:
             logger.error(f"Error {e} setting local url online")
-        return JSONResponse(content={"message": "Login successful", "access_token": tokens_dict["access_token"]})
+        return JSONResponse(content={"message": "Login successful", "access_token": tokens_dict["access_token"], "local_token_for_login": os.environ.get("LOCAL_TOKEN")})
     else:
         return JSONResponse(content={"message": f"Login failed, {response.content}"}, status_code=401)
 

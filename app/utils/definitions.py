@@ -16,12 +16,12 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
 UPLOAD_DIRECTORY = os.path.join(".", "static", "item_images")
 os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
-LOCAL_TOKEN = uuid.uuid4().hex
 SECRET_KEY = os.environ.get("SECRET_KEY", None)
 if not SECRET_KEY:
     SECRET_KEY = ''.join([str(uuid.uuid4()) for _ in range(3)])
     os.environ['SECRET_KEY'] = SECRET_KEY
     set_key('.env', 'SECRET_KEY', SECRET_KEY)
+
 
 DATABASE_URL = (
     f"postgresql+asyncpg://"
@@ -93,3 +93,11 @@ INITIAL_CHUNK_SIZE = 8_000_000  # 8 MB
 GITHUB_REPO = "astramind-ai/Pulsar"
 GITHUB_API_URL = f"https://api.github.com/repos/{GITHUB_REPO}/releases/latest"
 CONF_FILE = "last.yml"
+
+
+LOCAL_TOKEN = os.environ.get("LOCAL_TOKEN", None)
+# Generate a new token if it doesn't exist
+if not LOCAL_TOKEN:
+    LOCAL_TOKEN = ''.join([str(uuid.uuid4()) for _ in range(3)])
+    os.environ['LOCAL_TOKEN'] = LOCAL_TOKEN
+    set_key('.env', 'LOCAL_TOKEN', LOCAL_TOKEN)
