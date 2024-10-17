@@ -1,6 +1,6 @@
 # Configure Chat Settings
 
-*This guide provides a comprehensive overview of how to configure chat settings. By following these steps, you can customize the model, adjust LoRA personalities, and fine-tune advanced settings to optimize performance.*
+*This guide provides an overview of how to configure chat settings. By following these steps, you can customize the model, add LoRA, personalities and set advanced settings to optimize performance.*
 
 ![Chat Page](../images/chatpage.png)
 
@@ -50,11 +50,13 @@ Begin by selecting your desired model from the available options(already downloa
 
 ## Step 2: Configure LoRA (OPTIONAL)
 
-LoRA (Low-Rank Adaptation) allows you to customize your model's specialization. Select an existing LoRA.
+LoRA (Low-Rank Adaptation) allows you to customize your model's specialization. Select between the already downloaded LoRA.
+Puls automatically detect if the LoRA is compatible with the selected model.
+
 
 ## Step 3: Configure Personality (OPTIONAL)
 
-LoRA (Low-Rank Adaptation) allows you to customize your model's specialization. Select an existing LoRA.
+Personalities can be added to the any models to make the interaction of the model with you unique.
 
 ![Select models](../images/selectmodel.png)
 
