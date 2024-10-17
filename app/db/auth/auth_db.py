@@ -261,12 +261,13 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
             raise credential_exception
         return user
 
-async def get_current_user_for_login(token: str = Depends(oauth2_scheme)):
+async def get_current_user_for_login(request: Request, token: str = Depends(oauth2_scheme)):
     """
     Retrieve the current authenticated user based on the provided token.
 
     Args:
         token (str): The access token.
+        request (Request): The incoming request object.
 
     Returns:
         User: The authenticated user object.
@@ -274,7 +275,7 @@ async def get_current_user_for_login(token: str = Depends(oauth2_scheme)):
     Raises:
         HTTPException: If the user cannot be authenticated.
     """
-    if not token == os.environ.get("LOCAL_TOKEN"):
+    if not token == os.environ.get("LOCAL_TOKEN") and not is_same_machine_request(request.client.host):
         raise credential_exception
 
 
