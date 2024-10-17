@@ -96,6 +96,8 @@ Necessity of registration. This is because registration associates a pair of pub
 
 ## Installation
 
+![matrix](images/matrix.png)
+
 ### Linux
 Easy way: you can use our installation script in installer/installer.sh. 
 Download the file in a and then run `sudo chmod +x installer.sh` and then `bash installer.sh`
