@@ -11,9 +11,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Go
-RUN snap install --classic go
-
 # Create user and set up directories
 RUN useradd -m -d $HOME user && \
     mkdir -p $APP_HOME/configs && \

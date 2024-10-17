@@ -33,7 +33,6 @@ async def start_tunnel_after_server(server_args) -> None:
                          f"go into settings and then recreate the key pairs, otherwise you will not be able to use the tunneling feature.")
         finally:
             return
-
     # Servo is disabled since it will cause the request to drop with ERR_HTTP2_PROTOCOL_ERROR
     for tunnel_type in tunnel_types:
         try:
