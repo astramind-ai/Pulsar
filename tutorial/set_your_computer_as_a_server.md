@@ -19,11 +19,13 @@ Registration is necessary because it associates a pair of public and private key
 
 The first step is to download and install the Pulsar Server, then activate it. Refer to the installation guide for [Linux](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-LINUX.md) or [Windows](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-WINDOWS.md).
 
-Once the server is running, download it and double-click on Pulsar UI.
+Once the server is running, download and install Pulsar UI and double-click on it.
 
 **NOTE:** Make sure that the server is running correctly and shows a healthy status. It may take a few minutes. If it still does not work, try stopping and restarting the server. If the problem persists, open an [Issue](https://github.com/astramind-ai/PulsarUIReleases/issues) or contact us at [info](https://www.astramind.ai/contact).
 
 ## Step 2: Download and Start the Pulsar UI
+
+![pulsarclient](../images/matrix.png)
 
 ![Select or Create a Personality Item](../images/start.png)
 
