@@ -81,7 +81,7 @@ SUMMARIZATION_TEMPLATE = """I want you to summarize this text in a way that I wi
 topics based on this, {first_user_message}. Now summarize it in five word maxiumum, with no bullet points:"""
 
 # Tunnel related
-TUNNEL_TYPES = ["serveo", "localtunnel", "ngrok"]  # TODO: add sish
+TUNNEL_TYPES = ["localtunnel", "ngrok"]  # TODO: add sish, "serveo"
 
 # GGUF related
 GGUF_MAGIC = b"GGUF"
