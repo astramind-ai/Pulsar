@@ -44,6 +44,7 @@ class ExtendedAsyncEngineArgs(AsyncEngineArgs):
     server_config_file: str = "last.yml"
     allow_unsafe_local_requests: bool = False
     will_local_auth_token_rotate: bool = False
+    trust_remote_code = True
 
     @classmethod
     def from_model_conf(cls, config: dict):

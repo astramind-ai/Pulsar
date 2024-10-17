@@ -145,7 +145,7 @@ async def load_model(background_tasks: BackgroundTasks, model_url: str = Form(..
             delete_engine_model_from_vram()
 
             server_conf.model = model_path
-            server_conf.tokenizer = model_path
+            server_conf.tokenizer = model_url
             server_conf.served_model_name = [model_url]
             await initialize_engine(server_conf.get_async_eng_args(), UsageContext.OPENAI_API_SERVER)
             create_serving_instances(server_conf.served_model_name, server_conf)
