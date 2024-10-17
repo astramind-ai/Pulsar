@@ -104,7 +104,7 @@ Download the file in a and then run `sudo chmod +x installer.sh` and then `bash 
 
 Pulsar AI offers flexible installation options to suit different user needs and environments.
 For detailed, step-by-step installation instructions, please refer to our gudes:
-**[Linux Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/INSTALLATION-LINUX.md)** | **[Windows Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/WINDOWS-LINUX.md)**
+**[Linux Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/installation-linux.md)** | **[Windows Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/installation-windows.md)**
 
 ## Getting Started
 

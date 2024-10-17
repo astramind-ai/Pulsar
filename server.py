@@ -160,7 +160,6 @@ async def set_env_variable(background_tasks: BackgroundTasks, env_var: EnvVar, i
     try:
         # Obtain the path to the .env file
         env_path = os.path.join(os.path.dirname(__file__), '.env')
-        print(f"Setting environment variable {env_var.key} to {env_var.value} at file located in {env_path}")
         set_key(env_path, env_var.key, env_var.value)
 
         if env_var.reboot_required:
