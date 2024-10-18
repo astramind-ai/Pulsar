@@ -6,7 +6,6 @@ from typing import List, Tuple, Union, Optional, Dict
 
 import jwt
 from fastapi import Depends, HTTPException, status, Request
-from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -17,6 +16,7 @@ from app.utils.database.get import get_db
 from app.utils.decorators.cache import cache_unless_exception
 from app.utils.definitions import SECRET_KEY, ALGORITHM, LOCAL_TOKEN
 from app.utils.server.api_calls_to_main import make_api_request
+
 
 # Setup
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -45,7 +45,7 @@ async def validate_token(token: str = Depends(oauth2_scheme), ip: str = None):
     from app.core.engine import async_engine_args
     try:
         # We check if the request is form a local ip address
-        if is_same_machine_request(ip) or is_from_same_network(ip):
+        if is_from_local_network(ip):
             # we check if the token is the local token
             if token == LOCAL_TOKEN:
                 return {"username": "local_user", "is_local": True}
@@ -154,7 +154,7 @@ async def get_last_model_lora(db: AsyncSession, current_user: User) -> Dict:
     return {'model': user.last_model, 'lora': user.last_lora}
 
 
-# Token management functions
+# Token management function
 def create_access_token(data: dict) -> str:
     """
     Create a JWT access token using the provided data.
@@ -169,7 +169,30 @@ def create_access_token(data: dict) -> str:
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
-# Local request verification
+
+def get_allowed_networks() -> List[ipaddress.IPv4Network]:
+    """
+    Get a list of allowed network ranges, including Docker internal network if specified.
+
+    Returns:
+        List[ipaddress.IPv4Network]: List of allowed network ranges.
+    """
+    allowed_networks = [
+        ipaddress.ip_network("10.0.0.0/8"),
+        ipaddress.ip_network("172.16.0.0/12"),
+        ipaddress.ip_network("192.168.0.0/16"),
+    ]
+
+    docker_internal = os.environ.get("DOCKER_INTERNAL_NETWORK")
+    if docker_internal:
+        try:
+            allowed_networks.append(ipaddress.ip_network(docker_internal))
+        except ValueError:
+            print(f"Warning: Invalid DOCKER_INTERNAL_NETWORK value: {docker_internal}")
+
+    return allowed_networks
+
+
 def get_localhost_addresses() -> List[str]:
     """
     Retrieve a list of IP addresses associated with the localhost.
@@ -180,7 +203,8 @@ def get_localhost_addresses() -> List[str]:
     localhost_addresses = [
         "127.0.0.1",
         "::1",
-        "0:0:0:0:0:0:0:1"
+        "0:0:0:0:0:0:0:1",
+        "localhost"
     ]
     try:
         local_hostname = socket.gethostname()
@@ -190,56 +214,67 @@ def get_localhost_addresses() -> List[str]:
     return localhost_addresses
 
 
-def is_same_machine_request(client_ip: str) -> bool:
+def is_allowed_request(client_ip: str) -> bool:
     """
-    Check if a request originates from the same machine based on its IP address.
+    Check if a request is allowed based on its IP address.
+
+    This function checks if the request is from localhost, same machine,
+    or an allowed network (including Docker internal network if specified).
 
     Args:
         client_ip (str): The IP address of the incoming request.
 
     Returns:
-        bool: True if the request originates from the same machine, False otherwise.
+        bool: True if the request is allowed, False otherwise.
     """
-    return client_ip in get_localhost_addresses()
+    # Check for localhost and same machine
+    if client_ip in get_localhost_addresses():
+        return True
 
-
-import ipaddress
-
-
-def is_from_same_network(client_ip: str) -> bool:
-    """
-    Check if a request originates from a private network IP address.
-
-    This function checks against common private IP ranges:
-    - IPv4: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
-    - IPv6: fd00::/8 (Unique Local Addresses)
-
-    Args:
-        client_ip (str): The IP address of the incoming request.
-
-    Returns:
-        bool: True if the request originates from a private network, False otherwise.
-    """
     try:
         ip = ipaddress.ip_address(client_ip)
 
+        # Check for IPv4 private networks
         if ip.version == 4:
-            private_networks = [
-                ipaddress.ip_network("10.0.0.0/8"),
-                ipaddress.ip_network("172.16.0.0/12"),
-                ipaddress.ip_network("192.168.0.0/16")
-            ]
-            return any(ip in network for network in private_networks)
+            return any(ip in network for network in get_allowed_networks())
 
+        # Check for IPv6 Unique Local Addresses
         elif ip.version == 6:
-            ula_network = ipaddress.ip_network("fd00::/8")
-            return ip in ula_network
-
-        return False
+            return ip in ipaddress.ip_network("fd00::/8")
 
     except ValueError:
         # If the IP address is invalid, return False
         return False
+
+    return False
+
+
+async def ensure_local_request(request: Request):
+    """
+    Ensure that the incoming request is from an allowed source.
+
+    This function checks if the request is from localhost, same machine,
+    Docker internal network, or a valid local network (when using host networking).
+
+    Args:
+        request (Request): The incoming request object.
+
+    Raises:
+        HTTPException: If the request is not from an allowed source.
+    """
+    client_host = request.client.host
+
+    if is_allowed_request(client_host):
+        return True
+
+    # If the request is not from an allowed source, raise an exception
+    raise HTTPException(status_code=403, detail="Access denied. Request not from an allowed source.")
+
+
+# Update these functions to use the new unified check
+def is_from_local_network(client_ip: str) -> bool:
+    return is_allowed_request(client_ip)
+
 
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     """
@@ -275,7 +310,7 @@ async def get_current_user_for_login(request: Request, token: str = Depends(oaut
     Raises:
         HTTPException: If the user cannot be authenticated.
     """
-    if not token == os.environ.get("LOCAL_TOKEN") and not is_same_machine_request(request.client.host):
+    if not token == os.environ.get("LOCAL_TOKEN") and not is_from_local_network(request.client.host):
         raise credential_exception
 
 
@@ -299,23 +334,6 @@ async def auth_user_with_local_exception(request: Request, token: str = Depends(
             raise credential_exception
         return user
 
-async def ensure_local_request(request: Request):
-    """
-    Ensure that the incoming request is from the same machine or Docker internal network.
-
-    Args:
-        request (Request): The incoming request object.
-
-    Raises:
-        HTTPException: If the request is not local or from the Docker internal network.
-    """
-    client_host = request.client.host
-    if client_host not in ["127.0.0.1", "localhost", "::1"]:
-        # Check if the client is in the Docker internal network
-        docker_internal = os.environ.get("DOCKER_INTERNAL_NETWORK", "172.17.0.0/16")
-        if not ipaddress.ip_address(client_host) in ipaddress.ip_network(docker_internal):
-            raise HTTPException(status_code=403, detail="Access denied. Local requests only.")
-    return True
 
 # Online user configuration
 async def get_online_user_configuration() -> Tuple[str, str, str]:
