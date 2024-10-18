@@ -205,15 +205,11 @@ Now, let's discuss the importance of each of these settings:
 
    While not strictly necessary for local use, setting up Ngrok can greatly enhance Pulsar's accessibility and usefulness.
 
-## Step 5: Set Up the Database
+## Step 5: Download the UI
+Go to [PulsarUIReleases](https://github.com/astramind-ai/PulsarUIReleases/releases) and downlaod the latest Linux release (the AppImage file)
+Place it inside ~/pulsar (or your installation path)
 
-1. Run the database migrations:
-
-```bash
-alembic upgrade head
-```
-
-## Step 6: Start Pulsar
+## Step 5: Start Pulsar
 
 1. Start the Pulsar server:
 
@@ -222,24 +218,49 @@ python main.py
 ```
 
 
-## Step 7: Create a Desktop Entry (Optional)
+## Step 6: Create a Desktop Entry for the Server(Optional)
 
 1. Create a desktop entry file:
 
 ```bash
-sudo nano /usr/share/applications/pulsar.desktop
+sudo nano /usr/share/applications/pulsar-server.desktop
 ```
 
 2. Add the following content:
 
 ```
 [Desktop Entry]
-Name=Pulsar
+Name=Pulsar Server
 Exec=bash -c "cd ~/pulsar && conda activate pulsar && python main.py"
 Icon=~/pulsar/pulsar_icon.png
 Type=Application
 Categories=Utility;
 ```
+
+3. Download the Pulsar icon:
+
+```bash
+wget -O ~/pulsar/pulsar_server_icon.png "https://raw.githubusercontent.com/astramind-ai/Pulsar/main/assets/pulsar_server_icon.png" 
+```
+
+## Step 6: Create a Desktop Entry for the UI (Optional)
+
+1. Create a desktop entry file:
+
+```bash
+sudo nano /usr/share/applications/pulsar-ui.desktop
+```
+
+2. Add the following content:
+
+```
+[Desktop Entry]
+Name=Pulsar UI
+Exec=~/pulsar(or your installation path)/you_version.AppImage
+Icon=~/pulsar/pulsar_ui_icon.png
+Type=Application
+Categories=Utility;
+Terminal=false
 
 3. Download the Pulsar icon:
 
