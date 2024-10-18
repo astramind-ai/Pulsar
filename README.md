@@ -91,8 +91,9 @@ Created by two passionate programmers, this project aims to push the boundaries 
     - Daily up-to-date with the latest models
 
 ## Registration
-Necessity of registration. This is because registration associates a pair of public and private keys. The machine designated as the server stores the private key and generates encrypted requests to our server, which, by verifying the signature, attests to the validity of the request and associates the new URL with the account. This process is completely free and avoids complicated DNS or DMZ configurations, allowing users to simply and freely use tunneling. 
-**Everything is done to make it possible for the user to connect in a secure way with the local server. We do not keep any additional information of the user. Data users are not our business!!** 
+Necessity of registration. This is because registration associates a pair of public and private keys. The machine designated as the server stores the private key and generates encrypted requests to our server, which, by verifying the signature, attests to the validity of the request and associates the new URL with the account. This process is completely free and avoids complicated DNS or DMZ configurations, allowing users to simply and freely use tunneling.
+
+**Your privacy is our priority—Astramind never collects or uses your data. All your information remains solely on your computer, allowing you to manage your connections remotely in a secure and efficient way. Your data is yours and yours alone!** 
 
 ## Installation
 
