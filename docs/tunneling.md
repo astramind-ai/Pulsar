@@ -13,19 +13,33 @@ Edit the `last.yaml` configuration file, typically located at:
 
 In the `last.yaml` file, find or add the `tunnel_type` line. Set this parameter using one of the following values:
 
-tunnel_type: 'sish'    # 🌟 Recommended option
-# OR
-tunnel_type: 'localtunnel'
-# OR
-tunnel_type: 'ngrok'
-# OR
-tunnel_type: 'serveo'  # 🚫 Currently disabled
-# OR
-tunnel_type: 'local_ip'
-# OR 
-tunnel_type: 'no_tunnel' # 🔄 Disables tunneling
-# OR
-tunnel_type: null      # 🔄 Default behavior
+
+`tunnel_type: 'sish'    # 🌟 Recommended option`
+
+
+OR
+
+`tunnel_type: 'localtunnel'`
+
+OR
+
+`tunnel_type: 'ngrok'`
+
+OR 
+
+`tunnel_type: 'serveo'  # 🚫 Currently disabled`
+
+OR 
+
+`tunnel_type: 'local_ip'`
+
+OR 
+
+`tunnel_type: 'no_tunnel' # 🔄 Disables tunneling`
+
+OR
+
+`tunnel_type: null      # 🔄 Default behavior`
 
 ## 📋 Option Details
 
