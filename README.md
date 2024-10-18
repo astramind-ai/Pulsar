@@ -103,11 +103,18 @@ Necessity of registration. This is because registration associates a pair of pub
 Easy way: you can use our installation script in installer/installer.sh. 
 Download the file in a and then run `sudo chmod +x installer.sh` and then `bash installer.sh`
 
+### Windows (beta)
+Download and launch our installer, it will try to take care of:
+
+- GPU Driver installation (AMD or NVidia)
+- Docker
+- Pulsar UI 
+
 ### Detailed instructions
 
 Pulsar AI offers flexible installation options to suit different user needs and environments.
 For detailed, step-by-step installation instructions, please refer to our gudes:
-**[Linux Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/installation-linux.md)** | **[Windows Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/installation-windows.md)**
+**[Manual Linux Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/installation-linux.md)** | **[Manual Windows Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/installation-windows.md)**
 
 ## Getting Started
 
