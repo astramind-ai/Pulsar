@@ -22,6 +22,8 @@
 
 ![Pulsar Flow](images/pulsarflow.png)
 
+[Astramind.ai](https://www.astramind.ai)
+
 ## Welcome to Pulsar AI 🚀 
 
 The Pulsar project originated from our desire to have a system that was easy to use, easy to share, and that worked completely locally with language models (LLMs). Initially, we developed Pulsar solely as a user interface to use the models in streaming mode. However, as the project progressed and new features and trends were identified, we expanded its functionality to include features such as roleplaying, support for multimodal models, and soon RAG.
