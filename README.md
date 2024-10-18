@@ -104,7 +104,7 @@ Easy way: you can use our installation script in installer/installer.sh.
 Download the file in a and then run `sudo chmod +x installer.sh` and then `bash installer.sh`
 
 ### Windows (beta)
-Download and launch our installer, it will try to take care of:
+Download and launch our installer (coming really soon! fixing some minor bugs), it will try to take care of:
 
 - GPU Driver installation (AMD or NVidia)
 - Docker
