@@ -221,7 +221,7 @@ Write-Host "Setup complete. To start Pulsar AI, run 'docker-compose up -d' in th
 
 ## 5. Installing Pulsar UI 
 
-Install [this](https://github.com/astramind-ai/PulsarUIReleases/releases/download/v0.1.0/Pulsar.Setup.0.1.0.exe) and folow the instruction to complete the installation
+Install [this](https://github.com/astramind-ai/PulsarUIReleases/releases/download/v0.2.0/Pulsar.UI.Setup.0.2.0.exe) and folow the instruction to complete the installation
 
 ## 4. Running Pulsar AI
 
