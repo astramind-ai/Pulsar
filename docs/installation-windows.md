@@ -13,6 +13,24 @@ This guide will help you set up Pulsar AI on Windows with either NVIDIA or AMD G
 - Internet connection
 - Hyper-V and Containers Windows features enabled
 
+## Beta UI Installation
+[Download Pulsar Windows Installer (beta)](https://github.com/astramind-ai/Pulsar/releases/download/v0.2.1/WindowsPulsarServerInstaller.exe)
+
+Follow the prompts in the installer.
+It will:   
+- Check for a compatible GPU   
+- Install Docker and Docker Compose if needed
+- Set up the necessary Docker Compose configuration
+- Create and configure the .env file
+- Start the Pulsar AI services
+
+Once the installation is complete, you will find the Pulsar Server and Pulsar UI desktop applications. Open the Pulsar Server (double-click), and once it is ready, open Pulsar UI (double-click). You can access it locally at http://localhost:40000.
+
+If you encounter any problems with installatio, Please try the following steps:
+a. Restart your PC.
+b. If the issue persists, manually check GPU driver and in case reinstall your GPU driver.
+c. If you're still experiencing problems, please open an [issue](https://github.com/astramind-ai/Pulsar/issues) or contact us [Info](https://www.astramind.ai/contact)
+
 ## 1. GPU Driver Installation
 
 ### For NVIDIA GPUs:
