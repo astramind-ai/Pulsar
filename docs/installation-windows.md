@@ -107,7 +107,8 @@ PULSAR_HF_TOKEN=$hfToken
 PULSAR_SHOULD_SEND_PRIVATE_TOKEN=$shouldSendOnline
 PULSAR_NGROK_TOKEN=$ngrokToken
 PULSAR_DB_USER=astramind
-PULSAR_DB_NAME=pulsar
+POSTGRES_DB_NAME=pulsar
+PULSAR_DB_NAME=postgres:5432/pulsar
 PRIMARY_USE=$primaryUseText
 IS_ADULT_CONTENT=$isAdultContent
 DOCKER_IMAGE=$env:DOCKER_IMAGE
@@ -127,6 +128,8 @@ $composeContent = @"
 version: '3'
 services:
   postgres:
+    ports:
+      - "5432:5432"
     image: postgres:latest
     environment:
       POSTGRES_DB: `${PULSAR_DB_NAME}
@@ -141,13 +144,15 @@ services:
       timeout: 5s
       retries: 5
   pulsar:
+    ports:
+      - "40000:40000"
     image: `${DOCKER_IMAGE}
     volumes:
-      - `${USERPROFILE}/pulsar/configs:/home/user/Pulsar/configs:rw
-      - `${USERPROFILE}/pulsar/static:/home/user/Pulsar/static/item_images:rw
-      - `${USERPROFILE}/pulsar/.env:/home/user/Pulsar/.env:rw
-      - `${USERPROFILE}/.cache/huggingface:/home/user/.cache/huggingface:rw
-      - `${USERPROFILE}/pulsar/db_revision:/home/user/Pulsar/app/db/migration/alembic_/versions:rw
+      - `${USERPROFILE}\pulsar\configs:/home/user/Pulsar/configs:rw
+      - `${USERPROFILE}\pulsar\static:/home/user/Pulsar/static/item_images:rw
+      - `${USERPROFILE}\pulsar\.env:/home/user/Pulsar/.env:rw
+      - `${USERPROFILE}\.cache\huggingface:/home/user/.cache/huggingface:rw
+      - `${USERPROFILE}\pulsar\db_revision:/home/user/Pulsar/app/db/migration/alembic_/versions:rw
     depends_on:
       postgres:
         condition: service_healthy
