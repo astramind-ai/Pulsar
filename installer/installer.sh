@@ -323,14 +323,39 @@ volumes:
   pgdata:
 EOF
 
-# Create init-db.sql file
+# Get the values from the .env file or generate them if needed
+DB_PASSWORD=$(openssl rand -base64 32)
+DB_USER="astramind"
+
+# Create .env file first
+ENV_FILE="${PULSAR_DIR}/.env"
+
+if [ ! -f "$ENV_FILE" ]; then
+    cat << EOF > "$ENV_FILE"
+PULSAR_DB_PASSWORD=$DB_PASSWORD
+PULSAR_DB_USER=$DB_USER
+PULSAR_DB_NAME=localhost:5432/pulsar
+PULSAR_HF_TOKEN=
+PULSAR_SHOULD_SEND_PRIVATE_TOKEN=false
+PULSAR_NGROK_TOKEN=
+EOF
+    echo -e "\e[1;32mCreated new .env file at $ENV_FILE\e[0m"
+else
+    # Se il file esiste, leggi i valori esistenti
+    source "$ENV_FILE"
+    DB_PASSWORD=$PULSAR_DB_PASSWORD
+    DB_USER=$PULSAR_DB_USER
+fi
+
+
+# Create init-db.sql file with actual values instead of variables
 cat << EOF > "${PULSAR_DIR}/init-db.sql"
 -- Create user if not exists
 DO
 \$\$
 BEGIN
-  IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = '\${PULSAR_DB_USER}') THEN
-    CREATE USER \${PULSAR_DB_USER} WITH PASSWORD '\${PULSAR_DB_PASSWORD}';
+  IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = '$DB_USER') THEN
+    CREATE USER $DB_USER WITH PASSWORD '$DB_PASSWORD';
   END IF;
 END
 \$\$;
@@ -346,25 +371,9 @@ END
 \$\$;
 
 -- Grant privileges on the database
-GRANT ALL PRIVILEGES ON DATABASE pulsar TO \${PULSAR_DB_USER};
+GRANT ALL PRIVILEGES ON DATABASE pulsar TO $DB_USER;
+ALTER DATABASE pulsar OWNER TO $DB_USER;
 EOF
-
-# Create .env file
-ENV_FILE="${PULSAR_DIR}/.env"
-
-if [ ! -f "$ENV_FILE" ]; then
-    cat << EOF > "$ENV_FILE"
-PULSAR_DB_PASSWORD=$(openssl rand -base64 32)
-PULSAR_DB_USER=astramind
-PULSAR_DB_NAME=localhost:5432/pulsar
-PULSAR_HF_TOKEN=
-PULSAR_SHOULD_SEND_PRIVATE_TOKEN=false
-PULSAR_NGROK_TOKEN=
-EOF
-    echo -e "\e[1;32mCreated new .env file at $ENV_FILE\e[0m"
-else
-    echo -e "\e[1;33mExisting .env file found at $ENV_FILE. Keeping existing values.\e[0m"
-fi
 
 case $USAGE in
     "roleplay")
