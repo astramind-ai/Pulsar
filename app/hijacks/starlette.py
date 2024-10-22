@@ -1,8 +1,7 @@
 import json
-
+import asyncio
 from starlette.responses import StreamingResponse
 from starlette.types import Send
-
 from app.db.model.chat import Message
 from app.utils.log import setup_custom_logger
 
@@ -55,16 +54,23 @@ class WrappedStreamingResponse(StreamingResponse):
                 self.accumulate_content(decoded_chunk)
 
                 await send({"type": "http.response.body", "body": chunk, "more_body": True})
+        except asyncio.CancelledError:
+            logger.warn("Stream cancelled by client")
+            await self._safe_save_message_to_db()
+            raise
         except Exception as e:
-            logger.error(f"Stream interrupted: {str(e)}")
+            logger.warn(f"Stream interrupted: {str(e)}")
         finally:
-            # Save the last message
-            await self.save_message_to_db()
+            # Use asyncio.shield to ensure the save operation is not cancelled
+            try:
+                await asyncio.shield(self.save_message_to_db())
+            except Exception as e:
+                logger.error(f"Error saving message to database: {e}")
             await send({"type": "http.response.body", "body": b"", "more_body": False})
 
     def accumulate_content(self, chunk):
         if 'INTERNAL-' in chunk:
-            return  # This is done in order to not log the internal process sta
+            return  # This is done in order to not log the internal process state
         if chunk.startswith("data: "):
             content = chunk[6:].strip()  # Remove "data: " prefix
             if content != "[DONE]":
@@ -79,18 +85,17 @@ class WrappedStreamingResponse(StreamingResponse):
                     pass  # Ignore malformed JSON
 
     async def save_message_to_db(self):
-        async with self.db_session.begin():
-            try:
+        try:
+            async with self.db_session.begin():
                 if self.accumulated_content:
-                        new_message = Message(
-                            chat=self.chat,
-                            id=self.response_id,
-                            parent_message_id=self.parent_id,
-                            model_id=self.model_id,
-                            content={"role": "assistant", "content": self.accumulated_content}
-                        )
-                        self.db_session.add(new_message)
-            except Exception as e:
-                print(f"Error saving message to database: {str(e)}")
-                await self.db_session.rollback()
-                raise
+                    new_message = Message(
+                        chat=self.chat,
+                        id=self.response_id,
+                        parent_message_id=self.parent_id,
+                        model_id=self.model_id,
+                        content={"role": "assistant", "content": self.accumulated_content}
+                    )
+                    self.db_session.add(new_message)
+        except Exception as e:
+            logger.error(f"Error saving message to database: {str(e)}")
+            raise

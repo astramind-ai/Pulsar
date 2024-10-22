@@ -23,8 +23,9 @@ class ExtendedOpenAIServingChat(OpenAIServingChat):
             request: ExtendedChatCompletionRequest,
             raw_request: Optional[Request] = None,
     ) -> Union[AsyncGenerator[str, None], ChatCompletionResponse, ErrorResponse]:
-        request.truncate_prompt_tokens = float(
-            request.chat_history_cutoff_percentage / 100)  # this set the "history" if the user does not set it himself
+        request.truncate_prompt_tokens = int(
+            float(request.chat_history_cutoff_percentage / 100)
+            * self.max_model_len ) # this set the "history" if the user does not set it himself
         return await super().create_chat_completion(request, raw_request)
 
     async def stream_chat_completion_with_rstar(
@@ -53,4 +54,4 @@ class ExtendedOpenAIServingChat(OpenAIServingChat):
         (is_pulsar_boost, _) = await extract_parameter_from_request(request, ['pulsar_boost', ])
         if is_pulsar_boost:
             return await self.stream_chat_completion_with_rstar(request)
-        return await super().create_chat_completion(request, raw_request)
+        return await self.create_pulsar_chat_completion(request, raw_request)

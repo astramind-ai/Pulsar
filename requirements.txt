@@ -10,6 +10,7 @@ huggingface_hub==0.23.4
 jsonschema==4.23.0
 ngrok==1.4.0
 numpy
+brotli
 psycopg2-binary==2.9.9
 asyncpg==0.29.0
 python-multipart==0.0.12
