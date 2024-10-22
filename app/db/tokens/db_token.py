@@ -84,4 +84,4 @@ async def set_local_url_online(url: str):
 
         await make_api_request(db, "PUT", "/update_url", json_dict={"url": url}, headers=headers)
 
-        return 200  # if the request is successful
+    return 200  # if the request is successful
