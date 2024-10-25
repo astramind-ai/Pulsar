@@ -20,6 +20,7 @@
 - [Support](#support)
 - [Acknowledgments](Acknowledgments)
 
+
 ![Pulsar Flow](images/pulsarflow.png)
 
 [Astramind.ai](https://www.astramind.ai)
@@ -130,6 +131,8 @@ Here are some quick steps to get you started:
 
 
 ## Current State and Roadmap
+
+![Alt](https://repobeats.axiom.co/api/embed/b9a5d01f24c47dcb6847f33a48dbc85e9c457078.svg "Repobeats analytics image")
 
 As a v0.1.0 release, Pulsar is still in its early stages. It may have rough edges, and there's a lot we want to improve. But we're excited to share our progress and learn from the community.
 
