@@ -197,11 +197,8 @@ if [ "$GPU_VENDOR" == "NVIDIA" ]; then
     GPU_CONFIG=""
 elif [ "$GPU_VENDOR" == "AMD" ]; then
     DOCKER_IMAGE="marcoastramind/pulsar-amd:latest"
-    GPU_RUNTIME="rocm"
-    GPU_CONFIG="    devices:
-      - /dev/kfd
-      - /dev/dri
-    group_add:
+    GPU_RUNTIME=""
+    GPU_CONFIG="    group_add:
       - video"
 fi
 
