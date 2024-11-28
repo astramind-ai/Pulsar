@@ -319,7 +319,6 @@ COPY --chown=user:user . $APP_HOME
 USER user
 
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements-torch-amd.txt
 WORKDIR $APP_HOME
 RUN pip install --no-cache-dir -r requirements.txt
 
