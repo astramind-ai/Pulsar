@@ -197,8 +197,11 @@ if [ "$GPU_VENDOR" == "NVIDIA" ]; then
     GPU_CONFIG=""
 elif [ "$GPU_VENDOR" == "AMD" ]; then
     DOCKER_IMAGE="marcoastramind/pulsar-amd:latest"
-    GPU_RUNTIME=""
-    GPU_CONFIG="    group_add:
+    GPU_RUNTIME="rocm"
+    GPU_CONFIG="    devices:
+      - /dev/kfd
+      - /dev/dri
+    group_add:
       - video"
 fi
 
@@ -519,5 +522,4 @@ chown $ORIGINAL_USER:$ORIGINAL_USER "$UPDATE_SCRIPT"
 echo -e "\e[1;32m\nPulsar installation and setup complete!\e[0m"
 echo -e "\e[1;32mYou can now launch Pulsar Server and Pulsar UI from your application menu\e[0m"
 echo -e "\e[1;32mPulsar will auto-update weekly.\e[0m"
-
 
