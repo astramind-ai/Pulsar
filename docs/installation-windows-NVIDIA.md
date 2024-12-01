@@ -1,13 +1,13 @@
 [![](https://dcbadge.limes.pink/api/server/https://discord.gg/BEMVTmcPEs)](https://discord.gg/https://discord.gg/BEMVTmcPEs)
 
-# Simplified Pulsar AI Setup Guide for Windows (NVIDIA and AMD)
+# Pulsar AI Setup Guide for Windows (NVIDIA GPUs)
 
-This guide will help you set up Pulsar AI on Windows with either NVIDIA or AMD GPUs. We'll use some automated scripts to simplify the process.
+This guide will help you set up Pulsar AI on Windows with NVIDIA GPUs. We'll use some automated scripts to simplify the process.
 
 ## Prerequisites
 
 - Windows 10 64-bit: Pro, Enterprise, or Education (Build 16299 or later)
-- A compatible NVIDIA GPU (with CUDA 12.1+ support) or AMD GPU (with ROCm 6.1+ support)
+- A compatible NVIDIA GPU (with CUDA 12.1+ support)
 - At least 8GB of RAM (16GB or more recommended)
 - At least 50GB of free disk space
 - Internet connection
@@ -39,12 +39,6 @@ c. If you're still experiencing problems, please open an [issue](https://github.
 3. Run the installer and follow the on-screen instructions.
 4. Restart your computer after installation.
 
-### For AMD GPUs:
-1. Visit the [AMD Drivers and Support](https://rocm.docs.amd.com/projects/install-on-windows/en/docs-6.1.0/) page.
-2. Select your GPU model and download the latest driver.
-3. Run the installer and follow the on-screen instructions.
-4. Restart your computer after installation.
-
 ## 2. Installing Docker Desktop
 
 1. Download [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop).
@@ -67,10 +61,8 @@ function Detect-GPUType {
     $gpuInfo = Get-WmiObject Win32_VideoController | Where-Object { $_.AdapterCompatibility -match "NVIDIA|Advanced Micro Devices" }
     if ($gpuInfo.AdapterCompatibility -match "NVIDIA") {
         return "nvidia"
-    } elseif ($gpuInfo.AdapterCompatibility -match "Advanced Micro Devices") {
-        return "amd"
     } else {
-        Write-Host "No compatible NVIDIA or AMD GPU detected. Exiting."
+        Write-Host "No compatible NVIDIA GPU detected. Exiting."
         exit 1
     }
 }
@@ -79,7 +71,7 @@ function Detect-GPUType {
 $gpuType = Detect-GPUType
 
 # Set environment variables based on GPU type
-$env:DOCKER_IMAGE = if ($gpuType -eq "nvidia") { "marcoastramind/pulsar-nvidia" } else { "marcoastramind/pulsar-amd" }
+$env:DOCKER_IMAGE = if ($gpuType -eq "nvidia") { "marcoastramind/pulsar-nvidia" }
 $env:GPU_RUNTIME = $gpuType
 
 # Create necessary directories
@@ -189,17 +181,6 @@ services:
       start_period: 120s          
 "@
 
-if ($gpuType -eq "amd") {
-    $composeContent += @"
-
-    devices:
-      - /dev/kfd
-      - /dev/dri
-    group_add:
-      - video
-"@
-}
-
 $composeContent += @"
 
 volumes:
@@ -269,7 +250,6 @@ Install [this](https://github.com/astramind-ai/PulsarUIReleases/releases/downloa
 ## Troubleshooting
 
 - If you encounter issues with GPU access, ensure your GPU drivers are correctly installed and that Docker has the necessary permissions.
-- For AMD GPUs, make sure the ROCm for Windows package is properly installed and configured.
 - If the containers fail to start, check the Docker logs for error messages:
   ```powershell
   docker-compose logs

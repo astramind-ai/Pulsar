@@ -113,11 +113,16 @@ Download and launch our installer (coming really soon! fixing some minor bugs), 
 - Docker
 - Pulsar UI 
 
+[Download Pulsar Windows Installer (beta)](https://github.com/astramind-ai/Pulsar/releases/download/v0.2.1/WindowsPulsarServerInstaller.exe)
+
+
 ### Detailed instructions
 
 Pulsar AI offers flexible installation options to suit different user needs and environments.
 For detailed, step-by-step installation instructions, please refer to our gudes:
-**[Manual Linux Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/installation-linux.md)** | **[Manual Windows Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/installation-windows.md)**
+**[Manual Linux Installation Guide](https://github.com/astramind-ai/Pulsar/blob/main/docs/installation-linux.md)** | 
+**[Manual Windows Installation Guide (NVIDIA)](https://github.com/astramind-ai/Pulsar/blob/main/docs/installation-windows-NVIDIA.md)** |
+**[Manual Windows Installation Guide (AMD)](https://github.com/astramind-ai/Pulsar/blob/main/docs/installation-windows-AMD.md)**
 
 ## Getting Started
 
